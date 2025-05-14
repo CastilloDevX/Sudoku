@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sudoku Flask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .incorrect {
+            background-color: #ffcccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sudoku</h1>
+    <p>La siguiente página fue hecha con fines de desarrollo de proyectos usando Flask.</p>
+
+    <div id="message"></div>
+    <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Generando Sudoku...</p>
+    </div>
+
+    <div class="sudoku-board" id="board">
+        {% for row in range(9) %}
+            {% for col in range(9) %}
+                <div class="cell-container {% if (row // 3 + col // 3) % 2 == 0 %}region-1{% else %}region-2{% endif %}"
+                    data-row="{{ row }}" data-col="{{ col }}">
+                    <input type="text" class="cell-input" maxlength="1">
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <div class="controls">
+        <button id="generate">Generar Sudoku</button>
+        <button id="solve">Resolver Sudoku</button>
+        <select id="difficulty">
+            <option value="easy">Fácil</option>
+            <option value="medium">Medio</option>
+            <option value="hard">Difícil</option>
+        </select>
+        <button id="validate">Validar</button>
+    </div>
+
+    <p>Este sudoku puede:</p>
+    <p>Generar sudokus aleatorios, resolver el sudoku y comprobar si resolviste el soduku</p>
+
+    <p>Creadores:</p>
+    <p>Jose Manuel Castillo Queh</p>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
